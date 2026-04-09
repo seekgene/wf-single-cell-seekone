@@ -66,6 +66,11 @@ def argparser():
             alignment query (ignored with --kit=5prime).")
 
     parser.add_argument(
+            "--seq_7f_length", type=int, default=7,
+            help="Length of 7F sequence to use in the \
+                alignment query (used when --kit=flseekone:DDv1).")
+    
+    parser.add_argument(
         "--barcode_length", type=int, default=16,
         help="Cell barcode length")
 
@@ -267,11 +272,12 @@ def align_adapter(args, fastq_out=sys.stdout):
             umi="N" * args.umi_length,
             tso="TTTCTTATATGGG"
         )
-     elif args.kit == KitName.flseekone:
+    elif args.kit == KitName.flseekone:
         probe_seq = "{a1}{bc}{umi}".format(
             a1=adapter1_probe_seq,
             bc="N" * args.barcode_length,
-            umi="N" * args.umi_length
+            umi="N" * args.umi_length,
+            seq_7f="TTGCTGT"
         )
     else:
         raise Exception(
@@ -288,7 +294,7 @@ def align_adapter(args, fastq_out=sys.stdout):
 
         for read in fastq_fh:
 
-            if args.kit in (KitName.prime3, KitName.multiome, KitName.visium, K    itName.flseekone, KitName.seekone3):
+            if args.kit in (KitName.prime3, KitName.multiome, KitName.visium, KitName.flseekone, KitName.seekone3):
                 # Flip back to barcode orientation (reverse)
                 prefix_seq = rev_cmp(read.sequence)[: args.window]
                 prefix_qv = read.quality[::-1][: args.window:]
@@ -335,12 +341,12 @@ def align_adapter(args, fastq_out=sys.stdout):
                     trim_side = 'right'
                     trim_pos = p_alignment.end_query - 1
                     trim_pos -= args.polyt_length
-                elif args.kit == "KitName.flseekone":
-                    # The reads will be cDNA-UMI-BC-Adapter1,
+                elif args.kit == KitName.flseekone:
+                    # The reads will be cDNA-7F-UMI-BC-Adapter1,
                     # so to trim from right
-                    # random primer amplificatioa thus no polyT
                     trim_side = 'right'
                     trim_pos = p_alignment.end_query - 1
+                    trim_pos -= args.seq_7f_length
                 else:
                     # 5prime kit or 5seekone
                     # The reads will be adatper1-BC-UMI-TSO-cDNA-polyT,

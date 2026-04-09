@@ -3,8 +3,8 @@ FROM registry-vpc.cn-beijing.aliyuncs.com/seekgene/wf-single-cell:sha69b55755e85
 RUN /opt/custflow/epi2meuser/bin/micromamba install -p "/opt/custflow/epi2meuser/conda" -c conda-forge -c bioconda "nextflow>=23.04.2" openjdk=17 -y && \
     /opt/custflow/epi2meuser/bin/micromamba run -p "/opt/custflow/epi2meuser/conda" nextflow -version && \
     /opt/custflow/epi2meuser/bin/micromamba create -n wf_common -c conda-forge -c bioconda -c nanoporetech \
-    python=3.10 numpy pandas pysam h5py editdistance bokeh dacite \
-    fastcat==0.24.2 samtools gawk wget tar -y && \
+    python=3.10 numpy pandas pysam h5py editdistance bokeh dacite "setuptools<81" \
+    fastcat==0.24.2 samtools gawk wget tar matplotlib dominate ezcharts==0.15.2 -y && \
     /opt/custflow/epi2meuser/bin/micromamba clean -a -y
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -84,11 +84,6 @@ RUN /opt/custflow/epi2meuser/bin/micromamba run -n fusion bash -lc '\
 
 
 RUN mv $SRC/CTAT-LR-fusion/* $BIN/
-
-RUN /opt/custflow/epi2meuser/bin/micromamba install -n wf_common -c conda-forge -c bioconda -c nanoporetech \
-    python=3.10 numpy pandas pysam h5py editdistance bokeh \ 
-    matplotlib dominate ezcharts -y && \
-    /opt/custflow/epi2meuser/bin/micromamba clean -a -y
 
 ENV SHELL=/bin/bash WF_USER=epi2meuser WF_UID=1000 WF_GID=100
 ENV CW_ROOT=/opt/custflow

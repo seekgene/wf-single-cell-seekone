@@ -22,7 +22,7 @@ kit_adapters = {
     },
     'flseekone': {
         'adapter1': 'CTACACGACGCTCTTCCGATCT',
-        'adapter2': 'ATGTACTCTGCGTTGATACCACTGCTT'
+        'adapter2': 'CCCATGTACTCTGCGTTGATACCACTGCTT'
     },
     '3seekone': {
         'adapter1': 'CTACACGACGCTCTTCCGATCT',

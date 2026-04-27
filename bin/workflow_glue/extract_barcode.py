@@ -273,7 +273,7 @@ def align_adapter(args, fastq_out=sys.stdout):
             tso="TTTCTTATATGGG"
         )
     elif args.kit == KitName.flseekone:
-        probe_seq = "{a1}{bc}{umi}".format(
+        probe_seq = "{a1}{bc}{umi}{seq_7f}".format(
             a1=adapter1_probe_seq,
             bc="N" * args.barcode_length,
             umi="N" * args.umi_length,
@@ -345,8 +345,7 @@ def align_adapter(args, fastq_out=sys.stdout):
                     # The reads will be cDNA-7F-UMI-BC-Adapter1,
                     # so to trim from right
                     trim_side = 'right'
-                    trim_pos = p_alignment.end_query - 1
-                    trim_pos -= args.seq_7f_length
+                    trim_pos = p_alignment.end_query + 1
                 else:
                     # 5prime kit or 5seekone
                     # The reads will be adatper1-BC-UMI-TSO-cDNA-polyT,

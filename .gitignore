@@ -6,4 +6,3 @@ template-workflow
 *.pyc
 *.pyo
 .DS_store
-nextflow.config.bak

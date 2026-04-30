@@ -1,6 +1,6 @@
 FROM registry-vpc.cn-beijing.aliyuncs.com/seekgene/wf-single-cell:sha69b55755e85ed2abf209bf19d9f72d7b5dd5f807
 
-RUN /opt/custflow/epi2meuser/bin/micromamba install -p "/opt/custflow/epi2meuser/conda" -c conda-forge -c bioconda nextflow openjdk zip --freeze-installed -y && \
+RUN /opt/custflow/epi2meuser/bin/micromamba install -p "/opt/custflow/epi2meuser/conda" -c conda-forge -c bioconda nextflow==25.10.4 openjdk zip --freeze-installed -y && \
     /opt/custflow/epi2meuser/bin/micromamba create -n wf_common -c conda-forge -c bioconda -c nanoporetech \
     python=3.10 numpy pandas pysam h5py editdistance bokeh dacite "setuptools<81" \
     fastcat==0.24.2 samtools gawk wget tar matplotlib dominate ezcharts==0.15.2 -y && \

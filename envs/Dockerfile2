@@ -1,0 +1,2 @@
+FROM seekgene-registry-vpc.cn-beijing.cr.aliyuncs.com/seekgene/wf-single-cell:seekgene20260430_2
+RUN /opt/custflow/epi2meuser/bin/micromamba install -n base -c conda-forge bioconda::stringtie==3.0.3 -y

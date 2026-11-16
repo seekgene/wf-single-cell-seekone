@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1480 360" font-family="Helvetica, Arial, sans-serif">
+  <text x="20" y="30" font-size="22" font-weight="bold" fill="#161615">SeekOne DD read structure (5&#8242; &#8594; 3&#8242;)</text>
+
+  <!-- legend -->
+  <g font-size="12" fill="#161615">
+    <rect x="20" y="46" width="15" height="15" rx="3" fill="#5B9CD3"/><text x="40" y="59">adapter1 (Read1)</text>
+    <rect x="160" y="46" width="15" height="15" rx="3" fill="#F5C242"/><text x="180" y="59">barcode (17 bp)</text>
+    <rect x="305" y="46" width="15" height="15" rx="3" fill="#9FCE63"/><text x="325" y="59">UMI (12 bp)</text>
+    <rect x="420" y="46" width="15" height="15" rx="3" fill="#75FBE2"/><text x="440" y="59">polyT</text>
+    <rect x="545" y="46" width="15" height="15" rx="3" fill="#ADCDE9"/><text x="565" y="59">TSO handle</text>
+    <rect x="610" y="46" width="15" height="15" rx="3" fill="#2F6EBA"/><text x="630" y="59">7F</text>
+    <rect x="675" y="46" width="15" height="15" rx="3" fill="#D9D9D9"/><text x="695" y="59">cDNA insert</text>
+    <rect x="790" y="46" width="15" height="15" rx="3" fill="#9467BD"/><text x="810" y="59">adapter2</text>
+  </g>
+
+  <!-- Row 1: 3' -->
+  <text x="20" y="112" font-size="15" font-weight="bold" fill="#161615">SeekOne DD 3&#39; (3seekone:DDv2)</text>
+  <g font-size="12" font-family="'Courier New', monospace">
+    <rect x="330" y="90" width="220" height="34" fill="#5B9CD3"/>
+    <text x="440" y="112" text-anchor="middle" fill="#FFFFFF">CTACACGACGCTCTTCCGATCT</text>
+    <rect x="550" y="90" width="170" height="34" fill="#F5C242"/>
+    <text x="635" y="112" text-anchor="middle" fill="#161615">NNNNNNNNNNNNNNNNN</text>
+    <rect x="720" y="90" width="120" height="34" fill="#9FCE63"/>
+    <text x="780" y="112" text-anchor="middle" fill="#161615">NNNNNNNNNNNN</text>
+    <rect x="840" y="90" width="100" height="34" fill="#75FBE2"/>
+    <text x="890" y="112" text-anchor="middle" fill="#161615">TTTTTTTTTT</text>
+    <rect x="940" y="90" width="130" height="34" fill="#D9D9D9" stroke="#B0B0B0"/>
+    <text x="1005" y="112" text-anchor="middle" fill="#161615">cDNA ...</text>
+    <rect x="1070" y="90" width="230" height="34" fill="#9467BD"/>
+    <text x="1185" y="112" text-anchor="middle" fill="#FFFFFF">ATGTACTCTGCGTTGATACCACTGCTT</text>
+  </g>
+
+  <!-- Row 2: 5' -->
+  <text x="20" y="188" font-size="15" font-weight="bold" fill="#161615">SeekOne DD 5&#39; (5seekone:DDv2)</text>
+  <g font-size="12" font-family="'Courier New', monospace">
+    <rect x="330" y="166" width="220" height="34" fill="#5B9CD3"/>
+    <text x="440" y="188" text-anchor="middle" fill="#FFFFFF">CTACACGACGCTCTTCCGATCT</text>
+    <rect x="550" y="166" width="170" height="34" fill="#F5C242"/>
+    <text x="635" y="188" text-anchor="middle" fill="#161615">NNNNNNNNNNNNNNNNN</text>
+    <rect x="720" y="166" width="120" height="34" fill="#9FCE63"/>
+    <text x="780" y="188" text-anchor="middle" fill="#161615">NNNNNNNNNNNN</text>
+    <rect x="840" y="166" width="130" height="34" fill="#ADCDE9"/>
+    <text x="905" y="188" text-anchor="middle" fill="#161615">TTTCTTATATGGG</text>
+    <rect x="970" y="166" width="130" height="34" fill="#D9D9D9" stroke="#B0B0B0"/>
+    <text x="1035" y="188" text-anchor="middle" fill="#161615">cDNA ...</text>
+    <rect x="1100" y="166" width="100" height="34" fill="#75FBE2"/>
+    <text x="1150" y="188" text-anchor="middle" fill="#161615">TTTTTTTTTT</text>
+    <rect x="1200" y="166" width="230" height="34" fill="#9467BD"/>
+    <text x="1315" y="188" text-anchor="middle" fill="#FFFFFF">ATGTACTCTGCGTTGATACCACTGCTT</text>
+  </g>
+
+  <!-- Row 3: full-length -->
+  <text x="20" y="264" font-size="15" font-weight="bold" fill="#161615">scFAST (flseekone:DDv1)</text>
+  <g font-size="12" font-family="'Courier New', monospace">
+    <rect x="330" y="242" width="220" height="34" fill="#5B9CD3"/>
+    <text x="440" y="264" text-anchor="middle" fill="#FFFFFF">CTACACGACGCTCTTCCGATCT</text>
+    <rect x="550" y="242" width="170" height="34" fill="#F5C242"/>
+    <text x="635" y="264" text-anchor="middle" fill="#161615">NNNNNNNNNNNNNNNNN</text>
+    <rect x="720" y="242" width="120" height="34" fill="#9FCE63"/>
+    <text x="780" y="264" text-anchor="middle" fill="#161615">NNNNNNNNNNNN</text>
+    <rect x="840" y="242" width="70" height="34" fill="#2F6EBA"/>
+    <text x="875" y="264" text-anchor="middle" fill="#FFFFFF">TTGCTGT</text>
+    <rect x="910" y="242" width="130" height="34" fill="#D9D9D9" stroke="#B0B0B0"/>
+    <text x="975" y="264" text-anchor="middle" fill="#161615">cDNA ...</text>
+    <rect x="1040" y="242" width="255" height="34" fill="#9467BD"/>
+    <text x="1167" y="264" text-anchor="middle" fill="#FFFFFF">CCCATGTACTCTGCGTTGATACCACTGCTT</text>
+  </g>
+
+  <text x="20" y="330" font-size="13" fill="#48555F">Full-length reads are flanked by adapter1 (Read1) and adapter2. adapter2 is the TSO reverse complement: ATGTACTCTGCGTTGATACCACTGCTT (scFAST: CCCATGTACTCTGCGTTGATACCACTGCTT). The TSO handle (TTTCTTATATGGG) is the template-switching site near the UMI. All SeekOne kits use a 17 bp barcode and a 12 bp UMI.</text>
+</svg>

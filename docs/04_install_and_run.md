@@ -29,29 +29,12 @@ Nextflow and provide a list of all parameters
 available for the workflow as well as an example command:
 
 ```
-nextflow run epi2me-labs/wf-single-cell --help
+nextflow run wf-single-cell-seekone-1.1.0 --help
 ```
 To update a workflow to the latest version on the command line use
 the following command:
 ```
-nextflow pull epi2me-labs/wf-single-cell
-```
-
-A demo dataset is provided for testing of the workflow.
-It can be downloaded and unpacked using the following commands:
-```
-wget https://ont-exd-int-s3-euwst1-epi2me-labs.s3.amazonaws.com/wf-single-cell/wf-single-cell-demo.tar.gz
-tar -xzvf wf-single-cell-demo.tar.gz
-```
-The workflow can then be run with the downloaded demo data using:
-```
-nextflow run epi2me-labs/wf-single-cell \
-	--expected_cells 100 \
-	--fastq 'wf-single-cell-demo/chr17.fq.gz' \
-	--kit '3prime:v3' \
-	--ref_genome_dir 'wf-single-cell-demo' \
-	--genes_of_interest 'wf-single-cell-demo/umap_plot_genes.csv' \
-	-profile standard
+nextflow pull wf-single-cell-seekone-1.1.0
 ```
 
 For further information about running a workflow on

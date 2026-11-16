@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 330" font-family="Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="1240" height="330" fill="#F0F0F0"/>
+
+  <text x="20" y="34" font-size="22" font-weight="bold" fill="#030303">SeekOne barcode / UMI probe</text>
+  <text x="20" y="58" font-size="14" fill="#323232">The first 100 bp of each read is aligned to the probe below using parasail.</text>
+
+  <!-- probe (reference) -->
+  <text x="20" y="112" font-size="14" font-weight="bold" fill="#030303">probe (reference)</text>
+  <g font-size="14" font-family="'Courier New', monospace">
+    <rect x="200" y="90" width="110" height="36" fill="#955832"/>
+    <text x="255" y="113" text-anchor="middle" fill="#FFFFFF">CTTCCGATCT</text>
+    <rect x="310" y="90" width="180" height="36" fill="#9F801E"/>
+    <text x="400" y="113" text-anchor="middle" fill="#FFFFFF">NNNNNNNNNNNNNNNNN</text>
+    <rect x="490" y="90" width="130" height="36" fill="#647918"/>
+    <text x="555" y="113" text-anchor="middle" fill="#FFFFFF">NNNNNNNNNNNN</text>
+    <rect x="620" y="90" width="150" height="36" fill="#EA6523"/>
+    <text x="695" y="113" text-anchor="middle" fill="#FFFFFF">polyT / TSO / 7F</text>
+  </g>
+
+  <!-- brackets -->
+  <g stroke="#323232" stroke-width="1.5" fill="none">
+    <path d="M 310 80 L 310 68 L 490 68 L 490 80"/>
+    <path d="M 490 80 L 490 68 L 620 68 L 620 80"/>
+  </g>
+  <text x="400" y="60" font-size="13" text-anchor="middle" fill="#030303">cell barcode (17 bp)</text>
+  <text x="555" y="60" font-size="13" text-anchor="middle" fill="#030303">UMI (12 bp)</text>
+
+  <!-- read prefix (query) -->
+  <text x="20" y="196" font-size="14" font-weight="bold" fill="#030303">read prefix (query)</text>
+  <g font-size="14" font-family="'Courier New', monospace">
+    <rect x="200" y="174" width="110" height="36" fill="#C9A184" stroke="#955832"/>
+    <text x="255" y="197" text-anchor="middle" fill="#FFFFFF">...adapter1...</text>
+    <rect x="310" y="174" width="180" height="36" fill="#CBB96A" stroke="#9F801E"/>
+    <text x="400" y="197" text-anchor="middle" fill="#030303">cell barcode (17)</text>
+    <rect x="490" y="174" width="130" height="36" fill="#9CAF5C" stroke="#647918"/>
+    <text x="555" y="197" text-anchor="middle" fill="#030303">UMI (12)</text>
+    <rect x="620" y="174" width="150" height="36" fill="#F0B08C" stroke="#EA6523"/>
+    <text x="695" y="197" text-anchor="middle" fill="#030303">polyT / TSO / 7F</text>
+  </g>
+
+  <text x="20" y="258" font-size="13" fill="#323232">Anchor depends on the kit: polyT (SeekOne DD 3&#39;), TSO = TTTCTTATATGGG (SeekOne DD 5&#39;), 7F = TTGCTGT (scFAST).</text>
+  <text x="20" y="281" font-size="13" fill="#323232">The 17 bp aligning to the first N region is assigned as the uncorrected barcode; the following 12 bp as the uncorrected UMI.</text>
+</svg>

@@ -8,31 +8,30 @@ The [fastcat/bamstats](https://github.com/epi2me-labs/fastcat) tool is used to c
 
 ### 2. Stranding and identification of full-length reads
 
-Reads derived from a 10x Genomics library will ideally be flanked by two different adapter
+Reads derived from a SeekOne library will ideally be flanked by two different adapter
 sequences. These reads are more likely to represent full length mRNA molecules,
 although that isn't guaranteed as some cDNAs may have been created by internal
-priming or represent other cDNA synthesis artifacts. See this [10x Genomics Technical Note](https://cdn.10xgenomics.com/image/upload/v1660261286/support-documents/CG000376_TechNote_Antisense_Intronic_Reads_SingleCellGeneExpression_RevA.pdf) for more information.
+priming or represent other cDNA synthesis artifacts.
 
 
 This stage of the workflow assigns an adapter configuration to each read. 
 This assigned configurations allows the stranding and orientating the reads. 
-The following schematic shows an example read structure from 10x Genomics 3&#8242; library .
+The following figure shows the read structure for each SeekOne kit.
 
 <figure>
-<img src="docs/images/3prime_read.png" alt="10x read structure"/>
-<figcaption>Fig.1 Read structure for 10x 3prime kit reads</figcaption>
+<img src="docs/images/seekone_read_structure.svg" alt="SeekOne read structure"/>
+<figcaption>Fig.1 Read structure for the SeekOne DD kits</figcaption>
 </figure>
 
-Adapters are located within the reads using [vsearch](https://github.com/torognes/vsearch) (`Read1` and `TSO` in Fig.1 in the case of the 3prime kit).
-The table below details the adapter sequences for each of the 10x Genomics kits, along with links to the relevant user guides.
+Adapters are located within the reads using [vsearch](https://github.com/torognes/vsearch).
+The table below details the adapter sequences for each of the SeekOne kits.
 
 
-| Kit      | adapter1                | adapter2                     | 10x user guide                                                                                                                              |
-|----------|-------------------------|------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| 3&#8242; | CTACACGACGCTCTTCCGATCT  | ATGTACTCTGCGTTGATACCACTGCTT  | [3' kit](https://cdn.10xgenomics.com/image/upload/v1660261285/support-documents/CG000204_ChromiumNextGEMSingleCell3_v3.1_Rev_D.pdf)         |
-| 5&#8242; | CTACACGACGCTCTTCCGATCT  | ATGTACTCTGCGTTGATACCACTGCTT  | [5'  kit](https://cdn.10xgenomics.com/image/upload/v1666737555/support-documents/CG000331_ChromiumNextGEMSingleCell5-v2_UserGuide_RevE.pdf) |
-| Multiome | CTACACGACGCTCTTCCGATCT  | GTACTCTGCGTTGATACCACTGCTT    | [Multiome kit](https://cdn.10xgenomics.com/image/upload/v1728078404/support-documents/CG000338_ChromiumNextGEM_Multiome_ATAC_GEX_User_Guide_RevG.pdf.pdf)              |
-| Visium   | CTACACGACGCTCTTCCGATCT  | ATGTACTCTGCGTTGATACCACTGCTT  | [Visium kit](https://cdn.10xgenomics.com/image/upload/v1695417753/support-documents/CG000239_VisiumSpatialGeneExpression_UserGuide_RevG.pdf) |
+| Kit      | adapter1                | adapter2                     |
+|----------|-------------------------|------------------------------|
+| SeekOne DD 3' | CTACACGACGCTCTTCCGATCT  | ATGTACTCTGCGTTGATACCACTGCTT  |
+| SeekOne DD 5' | CTACACGACGCTCTTCCGATCT  | ATGTACTCTGCGTTGATACCACTGCTT  |
+| scFAST | CTACACGACGCTCTTCCGATCT  | CCCATGTACTCTGCGTTGATACCACTGCTT |
 
 Concatenated reads are identified by adapter configuration and are split into individual subreads and 
 reorientated if required.
@@ -55,28 +54,26 @@ If set to false, reads with only a single adapter or other non-full-length adapt
 
 
 ### 3. Extract cell barcodes and UMIs
-The next step is to extract 10x Genomics barcodes and UMI sequences from the stranded and trimmed reads.
+The next step is to extract SeekOne barcodes and UMI sequences from the stranded and trimmed reads.
 
-In order to do this, the first 100bp of each read are aligned to a reference probe using [parasail](https://github.com/jeffdaily/parasail). This probe contains a suffix of the adapter1 sequence, some ambiguities ("Ns") representing the barcode and UMI, and a polyT tract.
+In order to do this, the first 100bp of each read are aligned to a reference probe using [parasail](https://github.com/jeffdaily/parasail). This probe contains a suffix of the adapter1 sequence, some ambiguities ("Ns") representing the barcode and UMI, and a kit-specific anchor sequence (a polyT tract for 3' libraries, the TSO sequence for 5' libraries, or the 7F sequence for full-length libraries).
 
 <figure>
-<img src="docs/images/probe.png" alt="probe image"/>
-<figcaption>Fig.2 Schematic of a 3&#8242; v3 probe aligned to the read prefix</figcaption>
+<img src="docs/images/seekone_probe.svg" alt="SeekOne probe"/>
+<figcaption>Fig.2 Schematic of a SeekOne probe aligned to the read prefix</figcaption>
 </figure>
 
-In this case, the first 16bp of the read that aligns to the N probe region is where the barcode is expected to be, so
+The first 17 bp of the read that aligns to the N probe region is where the barcode is expected to be, so
 this sequence is assigned as `uncorrected barcode`.
 The following 12 bp are where the UMI is expected, and is assigned to `uncorrected umi`.
 
-The probe sequence will vary depending on the size of the expected barcode and UMI, which can be found in the 
-following table.
+All SeekOne kits use a 17 bp cell barcode and a 12 bp UMI, as shown in the following table.
 
-| kit      |version|barcode length| UMI length |
-|----------|---|---|------------|
-| 3&#8242;   |v2|16| 10         |
-| 3&#8242;   |v3|16| 12         |
-| 5&#8242;   |v1|16| 10         |
-| multiome |v1|16| 12         |
+| kit      | barcode length | UMI length |
+|----------|----------------|------------|
+| SeekOne DD 3' | 17 | 12 |
+| SeekOne DD 5' | 17 | 12 |
+| scFAST | 17 | 12 |
 
 Workflow options:
 - The size of the adapter1 suffix can be specified with: `barcode_adapter1_suff_length`
@@ -92,8 +89,7 @@ The stranded and trimmed FASTQ reads are mapped to the reference genome using mi
 
 The reference data can be supplied one of two ways:
 1. as a local path to a folder with `--ref_genome_dir`.
-Either use a 10x reference bundle (https://www.10xgenomics.com/support/software/cell-ranger/downloads#References) 
-or ensure that the reference directory contains the following files in the same folder structure
+Ensure that the reference directory contains the following files in the same folder structure
 ```
 └── refdata
     ├── fasta
@@ -101,18 +97,17 @@ or ensure that the reference directory contains the following files in the same 
     └── genes
         └── genes.gtf (or genes.gtf.gz)
 ```
-2. `--epi2me_resource_bundle`: Select this option to use a prebuilt 10x resource directory.
+2. `--epi2me_resource_bundle`: Select this option to use a prebuilt reference resource directory.
 This will be downloaded automatically by the workflow and stored in `store-dir`;
 subsequent runs from the same directory will reuse the reference data stored there.  
-There are currently prebuilt resource bundles for the 10x Human reference (GRCh38) - 2024-A
-reference bundle (https://www.10xgenomics.com/support/software/cell-ranger/downloads).
+There are currently prebuilt resource bundles for the Human reference (GRCh38) - 2024-A.
 
 
 
 
 ### 5. Barcode correction
 The aim of this stage is to correct errors present in the previously extracted barcodes.
-10x Genomics barcodes are not random; all possible barcode sequences can be found in a whitelist of known barcodes. 
+SeekOne barcodes are not random; all possible barcode sequences can be found in a whitelist of known barcodes. 
 The appropriate whitelist for each kit and version is chosen automatically by the workflow.
 The whitelist is used to generate a shortlist of high quality barcodes present in the sample, which is then used to 
 correct barcode errors.
@@ -129,13 +124,10 @@ The read count 95th percentile / 20 is the threshold used. This threshold can be
 
 Alternatively if a predetermined number of cells is required for analysis, setting `estimate_cell_count` to `false` results in a cell count of `expected_cells`.
 
-*note*: As `visium` barcodes do not represent cells, but rather tissue coordinates,
-shortlist cell count thresholding is not performed for `visium` analysis.
-
 For uncorrected barcodes not present in the shortlist, they are cross-referenced against the shortlist, and are assigned 
 a barcode from this list if the candidate barcode meets the following criteria:
 * the query and closest-matched shortlist barcode have an edit distance <= 2
-* The edit distance difference between the top and hit and second top hit in the shortlist >= 2
+* The edit distance difference between the top hit and second top hit in the shortlist >= 2
 
 *note*: Edit distance here refers specifically to the Levenshtein distance, which is the minimum number of single base 
 changes it would take to transform one UMI into another (including insertions, substitutions or deletions).
@@ -165,10 +157,10 @@ are set to unknown (-). This does not affect the gene assignment.
   * Order alignments by alignment score (AS)
   * If the top alignment has a better AS or query coverage than the second, and
   has a minimum transcript coverage of 0.4, assign to this transcript, else set as unknown (-)
-  * If the AS is the same between the 1st and 2nd alignment the choose the alignment that has the highest transcript coverage, if the coverage is > 0.8 
+  * If the AS is the same between the 1st and 2nd alignment then choose the alignment that has the highest transcript coverage, if the coverage is > 0.8 
 
 #### Gene assignment
-For each read, the alignment with the highest genomic MAPQ score is used for gene assignemnt if this score > `gene_assigns_minqv` (default 30).
+For each read, the alignment with the highest genomic MAPQ score is used for gene assignment if this score > `gene_assigns_minqv` (default 30).
 The gene ID is then derived from the transcript assigned in the transcript assignment step.
 
 ### 7. UMI correction 
@@ -199,20 +191,10 @@ and are also output in  Market Exchange (MEX) format.
 * Counts are normalized to `matrix_norm_count` (default 10,000) reads/cell
 * Normalized counts are finally log10 transformed
 
-One of the outputs from processing 10x Genomics Visium HD data are gene and transcript expression matrices.
-These are in the same format as the expression matrices described above for single cells data.
-To generate these matrices, the 2 µm x  2 µm data is binned by 4x to create 8 µm x 8 µm bins.
-This binned data is more amenable to visualisation and can ensure that there is sufficient transcript coverage per region to work with.
-This binned data is used within the workflow for spatial plotting in the report and for creating the processed expression matrices.
-The resulting MEX format directories are suffixed with `_8um`.
-
-For those users that require greater spatial resolution, the workflow ouptuts also include unbinned 2 µm x 2 µm expression matrices, 
-which can be found in the directories suffixed with `_8um`.
-
 ### 9. Tagging bam files
 BAM files generated from aligning reads to the reference genome are now tagged with the 
 following information from the workflow. By default, the BAMs are output per chromosome, but can be concatenated
-into a single file per sampe using `merge_bam`. The new bam will contain the following tags:
+into a single file per sample using `merge_bam`. The new bam will contain the following tags:
   - CB: corrected cell barcode sequence
   - CR: uncorrected cell barcode sequence
   - CY: Phred quality scores of the uncorrected cell barcode sequence
@@ -236,7 +218,7 @@ are subsampled by varying degrees and the resulting median reads/cell is plotted
     PCR duplicates represent a high proportion of the reads at higher sequencing depth.
 - Sequencing saturation:  calculated as `1 - (number of unique UMIs across all cells / number of reads across all cells)`. Values near 0 indicate that
  very few duplicate UMIs are being identified, whereas values nearer to 1 indicate a higher proportion of duplicate UMIs are being captured.
-    1 / (1 - sequencing saturation) can be used can be used to estimate how many additional reads would be required to identify a new UMI. For example, if the sequencing saturation is 0.5 
+    1 / (1 - sequencing saturation) can be used to estimate how many additional reads would be required to identify a new UMI. For example, if the sequencing saturation is 0.5 
     (50%) then for each two new reads, one of those should represent a new UMI. If the sequencing saturation is lower, at 0.2
     for example, then on average 1.25 reads would need to be sequenced to obtain a new UMI.
 
@@ -260,7 +242,7 @@ Some of these candidate variants may represent variants that were not detected a
 - The SNV workflow outputs: 
   * A merged VCF (`output/<alias>.final_merged.vcf.gz`) containing the genotype calls for each cell in the sample columns.
   * A MEX format genotype snv x cell matrix (`output/genotype_matrix`), which can be loaded into downstream tools such as seurat.
-  * The genotypes are encodes as follows
+  * The genotypes are encoded as follows
       * homozygous REF : 0
       * heterozygous ALT/REF 1
       * homozygous ALT: 2
@@ -271,7 +253,7 @@ Fusion transcript calling can be enabled using [ctat-LR-fusion](https://github.c
 allowing reads derived from fusion transcripts to be identified and assigned to cells. 
 This part of the workflow can be enabled with `--call_fusions`.
 
-The taqged BAM output from the workflow, containing cell and UMI barcode tags, is used as
+The tagged BAM output from the workflow, containing cell and UMI barcode tags, is used as
 input to ctat-LR-fusion. 
 
 ctat-LR-fusion requires a resource directory containing reference sequence and annotation information. It is important that the ctat-LR-fusion resource is built against the same
@@ -282,16 +264,15 @@ There are two ways to supply the ctat-LR-fusion resource directory:
 
 1.  `--ctat_resource_dir`: A path to a local copy of the resource directory.
 Prebuilt resource directories can be found here:  https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/.
-2. `--epi2me_resource_bundle`: Select this option to use a prebuilt ctat-LR-fusion resource bundle and the corresponding 10x reference data,
+2. `--epi2me_resource_bundle`: Select this option to use a prebuilt ctat-LR-fusion resource bundle and the corresponding reference data,
 which will be automatically downloaded from the cloud.
-Currently we have prebuilt bundles for the 10x human reference (GRCh38) - 2024-A
-reference bundle (https://www.10xgenomics.com/support/software/cell-ranger/downloads).
+Currently we have prebuilt bundles for the human reference (GRCh38) - 2024-A.
 
 The main output is a per read summary file where each read called as a fusion
 by ctat-LR-fusion is associated with a cell barcode/UMI and gene/transcript assignments. 
 
 
-### 12. Make UMAP plots
+### 13. Make UMAP plots
 UMAP (Uniform Manifold Approximation and Projection) is a data visualisation algorithm used
 for dimensionality reduction. It aims to preserve the local structure and relationships in high-dimensional data (in this case a gene x cell count matrix)
 when projecting it into a two-dimensional space. This allows structure within the data, such as cell type and state, to be visualised, 
@@ -303,24 +284,9 @@ Several UMAP plots are created:
 - gene expression plots show the gene expression UMAPs with each cell annotated with the mean gene expression count
 - mitochondrial expression plots are the same but annotated with mean mitochondrial expression
 - single gene expression UMAPs again show the gene expression UMAPs, but each plot is overlaid with a gene count data from a single gene. 
- These genes of interest can be specified by adding gene names to a file with the path spcified by `umap_plot_genes path/to/gene+names.csv`
+ These genes of interest can be specified by adding gene names to a file with the path specified by `umap_plot_genes path/to/gene+names.csv`
 - transcript expression plots shows the transcript expression UMAP plots with each cell annotated with the mean gene transcript count per cell
 
 The UMAP algorithm is stochastic, therefore analysing the same data multiple times, using identical parameters, can lead to visually different projections. 
 In order to have some confidence in the observed results, it can be useful to run the projection multiple times.
 The number of repeated projections can be set with `umap_n_repeats` (default 3)
-
-
-### 13 Visium HD support
-Visium HD is supported. ONT reads must first be processed by 10x Genomics Space Ranger. 
-Please see the instructions at https://epi2me.nanoporetech.com/epi2me-docs/tools/percula/. 
-
-ONT long read BAMs are processed by Percula to produce BAM files that are compatible with Space Ranger.
-
-wf-single-cell has the following relevant options:
-
-- `--bam`: the long read BAM output by Percula
-- `--spaceranger_bam`: the demultiplexed tagged BAM output by Space Ranger
-- `--adapter_stats`: the configs.json file output by Percula
-
-Note that the workflow expects a single sample for analysis of Visium HD data.

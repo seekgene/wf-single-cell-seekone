@@ -131,7 +131,8 @@ nextflow run wf-single-cell-seekone-1.1.0 \
     --fastq '<seekone_dd_3prime.fastq.gz>' \
     --kit '3seekone:DDv2' \
     --ref_genome_dir '<ref_genome_dir>' \
-    -profile standard
+    -c nextflow_seekgene.config \
+    -profile docker
 ```
 
 ### SeekOne DD 5' single-cell gene expression
@@ -142,7 +143,8 @@ nextflow run wf-single-cell-seekone-1.1.0 \
     --fastq '<seekone_dd_5prime.fastq.gz>' \
     --kit '5seekone:DDv2' \
     --ref_genome_dir '<ref_genome_dir>' \
-    -profile standard
+    -c nextflow_seekgene.config \
+    -profile docker
 ```
 
 ### scFAST single-cell full-length transcriptome
@@ -153,7 +155,8 @@ nextflow run wf-single-cell-seekone-1.1.0 \
     --fastq '<seekone_dd_full_length.fastq.gz>' \
     --kit 'flseekone:DDv1' \
     --ref_genome_dir '<ref_genome_dir>' \
-    -profile standard
+    -c nextflow_seekgene.config \
+    -profile docker
 ```
 
 ## Related protocols

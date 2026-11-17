@@ -19,7 +19,7 @@ This assigned configurations allows the stranding and orientating the reads.
 The following figure shows the read structure for each SeekOne kit.
 
 <figure>
-<img src="docs/images/seekone_read_structure.svg" width="900" alt="SeekOne read structure"/>
+<img src="docs/images/seekone_read_structure.svg" width="1000" alt="SeekOne read structure"/>
 <figcaption>Fig.1 Read structure for the SeekOne DD kits</figcaption>
 </figure>
 
@@ -59,7 +59,7 @@ The next step is to extract SeekOne barcodes and UMI sequences from the stranded
 In order to do this, the first 100bp of each read are aligned to a reference probe using [parasail](https://github.com/jeffdaily/parasail). This probe contains a suffix of the adapter1 sequence, some ambiguities ("Ns") representing the barcode and UMI, and a kit-specific anchor sequence (a polyT tract for 3' libraries, the TSO sequence for 5' libraries, or the 7F sequence for full-length libraries).
 
 <figure>
-<img src="docs/images/seekone_probe.svg" width="780" alt="SeekOne probe"/>
+<img src="docs/images/seekone_probe.svg" width="880" alt="SeekOne probe"/>
 <figcaption>Fig.2 Schematic of a SeekOne probe aligned to the read prefix</figcaption>
 </figure>
 

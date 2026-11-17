@@ -1,89 +1,81 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 1040" font-family="Helvetica, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 410" font-family="Helvetica, Arial, sans-serif">
   <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#027BA5"/>
     </marker>
   </defs>
 
-  <text x="20" y="32" font-size="22" font-weight="bold" fill="#000000">wf-single-cell (SeekOne) workflow</text>
+  <text x="20" y="30" font-size="20" font-weight="bold" fill="#000000">wf-single-cell (SeekOne) workflow</text>
 
-  <!-- step boxes -->
-  <g font-size="15">
-    <!-- 1 -->
-    <rect x="80" y="56" width="400" height="52" rx="6" fill="#027BA5"/>
-    <text x="100" y="78" font-weight="bold" fill="#FFFFFF">1. Input reads</text>
-    <text x="100" y="97" font-size="12" fill="#D6EAF3">FASTQ / BAM</text>
-    <line x1="280" y1="108" x2="280" y2="130" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- Column 1 (left, top -> bottom): steps 1-7 -->
+  <g font-size="13">
+    <rect x="30" y="44" width="440" height="40" rx="6" fill="#027BA5"/>
+    <text x="50" y="62" font-weight="bold" fill="#FFFFFF">1. Input reads</text>
+    <text x="50" y="76" font-size="10.5" fill="#D6EAF3">FASTQ / BAM</text>
+    <line x1="250" y1="84" x2="250" y2="96" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
 
-    <!-- 2 -->
-    <rect x="80" y="132" width="400" height="52" rx="6" fill="#027BA5"/>
-    <text x="100" y="154" font-weight="bold" fill="#FFFFFF">2. Adapter identification &amp; stranding</text>
-    <text x="100" y="173" font-size="12" fill="#D6EAF3">vsearch</text>
-    <line x1="280" y1="184" x2="280" y2="206" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="30" y="96" width="440" height="40" rx="6" fill="#027BA5"/>
+    <text x="50" y="114" font-weight="bold" fill="#FFFFFF">2. Adapter identification &amp; stranding</text>
+    <text x="50" y="128" font-size="10.5" fill="#D6EAF3">vsearch</text>
+    <line x1="250" y1="136" x2="250" y2="148" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
 
-    <!-- 3 -->
-    <rect x="80" y="208" width="400" height="52" rx="6" fill="#027BA5"/>
-    <text x="100" y="230" font-weight="bold" fill="#FFFFFF">3. Cell barcode &amp; UMI extraction</text>
-    <text x="100" y="249" font-size="12" fill="#D6EAF3">parasail</text>
-    <line x1="280" y1="260" x2="280" y2="282" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="30" y="148" width="440" height="40" rx="6" fill="#027BA5"/>
+    <text x="50" y="166" font-weight="bold" fill="#FFFFFF">3. Cell barcode &amp; UMI extraction</text>
+    <text x="50" y="180" font-size="10.5" fill="#D6EAF3">parasail</text>
+    <line x1="250" y1="188" x2="250" y2="200" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
 
-    <!-- 4 -->
-    <rect x="80" y="284" width="400" height="52" rx="6" fill="#027BA5"/>
-    <text x="100" y="306" font-weight="bold" fill="#FFFFFF">4. Align reads to reference genome</text>
-    <text x="100" y="325" font-size="12" fill="#D6EAF3">minimap2</text>
-    <line x1="280" y1="336" x2="280" y2="358" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="30" y="200" width="440" height="40" rx="6" fill="#027BA5"/>
+    <text x="50" y="218" font-weight="bold" fill="#FFFFFF">4. Align reads to reference genome</text>
+    <text x="50" y="232" font-size="10.5" fill="#D6EAF3">minimap2</text>
+    <line x1="250" y1="240" x2="250" y2="252" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
 
-    <!-- 5 -->
-    <rect x="80" y="360" width="400" height="52" rx="6" fill="#027BA5"/>
-    <text x="100" y="382" font-weight="bold" fill="#FFFFFF">5. Barcode correction</text>
-    <text x="100" y="401" font-size="12" fill="#D6EAF3">whitelist</text>
-    <line x1="280" y1="412" x2="280" y2="434" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="30" y="252" width="440" height="40" rx="6" fill="#027BA5"/>
+    <text x="50" y="270" font-weight="bold" fill="#FFFFFF">5. Barcode correction</text>
+    <text x="50" y="284" font-size="10.5" fill="#D6EAF3">whitelist</text>
+    <line x1="250" y1="292" x2="250" y2="304" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
 
-    <!-- 6 -->
-    <rect x="80" y="436" width="400" height="52" rx="6" fill="#027BA5"/>
-    <text x="100" y="458" font-weight="bold" fill="#FFFFFF">6. Gene &amp; transcript assignment</text>
-    <text x="100" y="477" font-size="12" fill="#D6EAF3">stringtie2 · gffcompare</text>
-    <line x1="280" y1="488" x2="280" y2="510" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="30" y="304" width="440" height="40" rx="6" fill="#027BA5"/>
+    <text x="50" y="322" font-weight="bold" fill="#FFFFFF">6. Gene &amp; transcript assignment</text>
+    <text x="50" y="336" font-size="10.5" fill="#D6EAF3">stringtie2 · gffcompare</text>
+    <line x1="250" y1="344" x2="250" y2="356" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
 
-    <!-- 7 -->
-    <rect x="80" y="512" width="400" height="52" rx="6" fill="#027BA5"/>
-    <text x="100" y="534" font-weight="bold" fill="#FFFFFF">7. UMI correction</text>
-    <text x="100" y="553" font-size="12" fill="#D6EAF3">UMI-tools</text>
-    <line x1="280" y1="564" x2="280" y2="586" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="30" y="356" width="440" height="40" rx="6" fill="#027BA5"/>
+    <text x="50" y="374" font-weight="bold" fill="#FFFFFF">7. UMI correction</text>
+    <text x="50" y="388" font-size="10.5" fill="#D6EAF3">UMI-tools</text>
+  </g>
 
-    <!-- 8 -->
-    <rect x="80" y="588" width="400" height="52" rx="6" fill="#6ABCBC"/>
-    <text x="100" y="610" font-weight="bold" fill="#FFFFFF">8. Make expression matrices</text>
-    <text x="100" y="629" font-size="12" fill="#EAF5F5">MEX (gene / transcript x cell)</text>
-    <line x1="280" y1="640" x2="280" y2="662" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- horizontal connector 7 -> 8 -->
+  <line x1="470" y1="376" x2="530" y2="376" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
 
-    <!-- 9 -->
-    <rect x="80" y="664" width="400" height="52" rx="6" fill="#027BA5"/>
-    <text x="100" y="686" font-weight="bold" fill="#FFFFFF">9. Tag BAM files</text>
-    <text x="100" y="705" font-size="12" fill="#D6EAF3">CB / CR / UB / UR / GN / TR tags</text>
-    <line x1="280" y1="716" x2="280" y2="738" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- Column 2 (right, bottom -> top): steps 8-13 -->
+  <g font-size="13">
+    <rect x="530" y="356" width="440" height="40" rx="6" fill="#6ABCBC"/>
+    <text x="550" y="374" font-weight="bold" fill="#FFFFFF">8. Make expression matrices</text>
+    <text x="550" y="388" font-size="10.5" fill="#EAF5F5">MEX (gene / transcript x cell)</text>
+    <line x1="750" y1="356" x2="750" y2="344" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
 
-    <!-- 10 -->
-    <rect x="80" y="740" width="400" height="52" rx="6" fill="#027BA5"/>
-    <text x="100" y="762" font-weight="bold" fill="#FFFFFF">10. Calculate library saturation</text>
-    <text x="100" y="781" font-size="12" fill="#D6EAF3">median genes / UMIs per cell</text>
-    <line x1="280" y1="792" x2="280" y2="814" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="530" y="304" width="440" height="40" rx="6" fill="#027BA5"/>
+    <text x="550" y="322" font-weight="bold" fill="#FFFFFF">9. Tag BAM files</text>
+    <text x="550" y="336" font-size="10.5" fill="#D6EAF3">CB / CR / UB / UR / GN / TR tags</text>
+    <line x1="750" y1="304" x2="750" y2="292" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
 
-    <!-- 11 (optional) -->
-    <rect x="80" y="816" width="400" height="52" rx="6" fill="#FFCE63" stroke="#E5A700" stroke-width="1.5" stroke-dasharray="6 4"/>
-    <text x="100" y="838" font-weight="bold" fill="#121212">11. SNV calling (optional)</text>
-    <text x="100" y="857" font-size="12" fill="#5D5D5D">longshot</text>
-    <line x1="280" y1="868" x2="280" y2="890" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="530" y="252" width="440" height="40" rx="6" fill="#027BA5"/>
+    <text x="550" y="270" font-weight="bold" fill="#FFFFFF">10. Calculate library saturation</text>
+    <text x="550" y="284" font-size="10.5" fill="#D6EAF3">median genes / UMIs per cell</text>
+    <line x1="750" y1="252" x2="750" y2="240" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
 
-    <!-- 12 (optional) -->
-    <rect x="80" y="892" width="400" height="52" rx="6" fill="#FFCE63" stroke="#E5A700" stroke-width="1.5" stroke-dasharray="6 4"/>
-    <text x="100" y="914" font-weight="bold" fill="#121212">12. Fusion calling (optional)</text>
-    <text x="100" y="933" font-size="12" fill="#5D5D5D">ctat-LR-fusion</text>
-    <line x1="280" y1="944" x2="280" y2="966" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="530" y="200" width="440" height="40" rx="6" fill="#FFCE63" stroke="#E5A700" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="550" y="218" font-weight="bold" fill="#121212">11. SNV calling (optional)</text>
+    <text x="550" y="232" font-size="10.5" fill="#5D5D5D">longshot</text>
+    <line x1="750" y1="200" x2="750" y2="188" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
 
-    <!-- 13 -->
-    <rect x="80" y="968" width="400" height="52" rx="6" fill="#6ABCBC"/>
-    <text x="100" y="990" font-weight="bold" fill="#FFFFFF">13. Make UMAP plots</text>
-    <text x="100" y="1009" font-size="12" fill="#EAF5F5">gene / transcript expression</text>
+    <rect x="530" y="148" width="440" height="40" rx="6" fill="#FFCE63" stroke="#E5A700" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="550" y="166" font-weight="bold" fill="#121212">12. Fusion calling (optional)</text>
+    <text x="550" y="180" font-size="10.5" fill="#5D5D5D">ctat-LR-fusion</text>
+    <line x1="750" y1="148" x2="750" y2="136" stroke="#027BA5" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <rect x="530" y="96" width="440" height="40" rx="6" fill="#6ABCBC"/>
+    <text x="550" y="114" font-weight="bold" fill="#FFFFFF">13. Make UMAP plots</text>
+    <text x="550" y="128" font-size="10.5" fill="#EAF5F5">gene / transcript expression</text>
   </g>
 </svg>

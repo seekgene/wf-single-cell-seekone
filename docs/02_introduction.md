@@ -14,7 +14,7 @@ In brief, the workflow does the following:
 + Calculation of library saturation.
 
 <figure>
-<img src="docs/images/seekone_workflow.svg" alt="wf-single-cell workflow schematic."/>
+<img src="docs/images/seekone_workflow.svg" width="600" alt="wf-single-cell workflow schematic."/>
 <figcaption>Schematic depicting the wf-single-cell (SeekOne) workflow.</figcaption>
 </figure>
 

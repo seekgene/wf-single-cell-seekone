@@ -1,7 +1,5 @@
 
-These are instructions to install and run the workflow on command line.
-You can also access the workflow via the
-[EPI2ME Desktop application](https://labs.epi2me.io/downloads/).
+These are instructions to install and run the workflow on the command line.
 
 The workflow uses [Nextflow](https://www.nextflow.io/) to manage
 compute and software resources,
@@ -18,23 +16,17 @@ This is controlled by the
 [`-profile`](https://www.nextflow.io/docs/latest/config.html#config-profiles)
 parameter as exemplified below.
 
-It is not required to clone or download the git repository
-in order to run the workflow.
-More information on running EPI2ME workflows can
-be found on our [website](https://labs.epi2me.io/wfindex).
-
-The following command can be used to obtain the workflow.
-This will pull the repository in to the assets folder of
-Nextflow and provide a list of all parameters
-available for the workflow as well as an example command:
+Clone the repository and enter the workflow directory:
 
 ```
-nextflow run wf-single-cell-seekone-1.1.0 --help
+git clone https://github.com/seekgene/wf-single-cell-seekone.git
+cd wf-single-cell-seekone
 ```
-To update a workflow to the latest version on the command line use
-the following command:
+
+To view all available parameters and an example command, run:
+
 ```
-nextflow pull wf-single-cell-seekone-1.1.0
+nextflow run . --help
 ```
 
 For further information about running a workflow on

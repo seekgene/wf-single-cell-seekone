@@ -89,13 +89,13 @@ The stranded and trimmed FASTQ reads are mapped to the reference genome using mi
 
 The reference data can be supplied one of two ways:
 1. as a local path to a folder with `--ref_genome_dir`.
-Ensure that the reference directory contains the following files in the same folder structure
+The reference directory should contain the following structure:
 ```
-└── refdata
-    ├── fasta
-    │   └── genome.fa (or genome.fa.gz)
-    └── genes
-        └── genes.gtf (or genes.gtf.gz)
+<ref_genome_dir>
+├── fasta
+│   └── genome.fa (or genome.fa.gz)
+└── genes
+    └── genes.gtf (or genes.gtf.gz)
 ```
 2. `--epi2me_resource_bundle`: Select this option to use a prebuilt reference resource directory.
 This will be downloaded automatically by the workflow and stored in `store-dir`;

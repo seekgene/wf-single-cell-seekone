@@ -62,9 +62,7 @@ ARM processor support: False
 ## Install and run
 
 
-These are instructions to install and run the workflow on command line.
-You can also access the workflow via the
-[EPI2ME Desktop application](https://labs.epi2me.io/downloads/).
+These are instructions to install and run the workflow on the command line.
 
 The workflow uses [Nextflow](https://www.nextflow.io/) to manage
 compute and software resources,
@@ -81,23 +79,17 @@ This is controlled by the
 [`-profile`](https://www.nextflow.io/docs/latest/config.html#config-profiles)
 parameter as exemplified below.
 
-It is not required to clone or download the git repository
-in order to run the workflow.
-More information on running EPI2ME workflows can
-be found on our [website](https://labs.epi2me.io/wfindex).
-
-The following command can be used to obtain the workflow.
-This will pull the repository in to the assets folder of
-Nextflow and provide a list of all parameters
-available for the workflow as well as an example command:
+Clone the repository and enter the workflow directory:
 
 ```
-nextflow run wf-single-cell-seekone-1.1.0 --help
+git clone https://github.com/seekgene/wf-single-cell-seekone.git
+cd wf-single-cell-seekone
 ```
-To update a workflow to the latest version on the command line use
-the following command:
+
+To view all available parameters and an example command, run:
+
 ```
-nextflow pull wf-single-cell-seekone-1.1.0
+nextflow run . --help
 ```
 
 For further information about running a workflow on
@@ -122,11 +114,12 @@ cell barcode and a 12 bp UMI.
 | scFAST | Single-cell full-length transcriptome | `flseekone:DDv1` |
 
 The commands below show how to run the workflow for each SeekOne product.
+Run them from within the cloned workflow directory.
 
 ### SeekOne DD 3' single-cell gene expression
 
 ```
-nextflow run wf-single-cell-seekone-1.1.0 \
+nextflow run . \
     --expected_cells <expected_cells> \
     --fastq '<seekone_dd_3prime.fastq.gz>' \
     --kit '3seekone:DDv2' \
@@ -138,7 +131,7 @@ nextflow run wf-single-cell-seekone-1.1.0 \
 ### SeekOne DD 5' single-cell gene expression
 
 ```
-nextflow run wf-single-cell-seekone-1.1.0 \
+nextflow run . \
     --expected_cells <expected_cells> \
     --fastq '<seekone_dd_5prime.fastq.gz>' \
     --kit '5seekone:DDv2' \
@@ -150,7 +143,7 @@ nextflow run wf-single-cell-seekone-1.1.0 \
 ### scFAST single-cell full-length transcriptome
 
 ```
-nextflow run wf-single-cell-seekone-1.1.0 \
+nextflow run . \
     --expected_cells <expected_cells> \
     --fastq '<seekone_dd_full_length.fastq.gz>' \
     --kit 'flseekone:DDv1' \
@@ -293,13 +286,13 @@ The stranded and trimmed FASTQ reads are mapped to the reference genome using mi
 
 The reference data can be supplied one of two ways:
 1. as a local path to a folder with `--ref_genome_dir`.
-Ensure that the reference directory contains the following files in the same folder structure
+The reference directory should contain the following structure:
 ```
-└── refdata
-    ├── fasta
-    │   └── genome.fa (or genome.fa.gz)
-    └── genes
-        └── genes.gtf (or genes.gtf.gz)
+<ref_genome_dir>
+├── fasta
+│   └── genome.fa (or genome.fa.gz)
+└── genes
+    └── genes.gtf (or genes.gtf.gz)
 ```
 2. `--epi2me_resource_bundle`: Select this option to use a prebuilt reference resource directory.
 This will be downloaded automatically by the workflow and stored in `store-dir`;

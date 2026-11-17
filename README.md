@@ -218,7 +218,7 @@ The table below shows the expected read structure for each SeekOne kit.
 | Kit | Read structure (5&#8242; &#8594; 3&#8242;) |
 |-----|------------------------------|
 | SeekOne DD 3' | `[adapter1][barcode][UMI][polyT][cDNA][TSO]` |
-| SeekOne DD 5' | `[adapter1][barcode][UMI][TSO][cDNA][polyT][adapter2]` |
+| SeekOne DD 5' | `[adapter1][barcode][UMI][TSO][cDNA][polyA][adapter2]` |
 | scFAST | `[adapter1][barcode][UMI][7F][cDNA][adapter2]` |
 
 Adapters are located within the reads using [vsearch](https://github.com/torognes/vsearch).
